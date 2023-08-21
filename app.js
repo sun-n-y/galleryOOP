@@ -59,18 +59,28 @@ Gallery.prototype.setMainImage = function (selectedImage) {
 
 Gallery.prototype.closeModal = function () {
   this.modal.classList.remove('open');
-  //remove event listeners
+  //remove event listeners for modal
   this.closeBtn.removeEventListener('click', this.closeModal);
   this.nextBtn.removeEventListener('click', this.nextImage);
   this.prevBtn.removeEventListener('click', this.prevImage);
 };
 
 Gallery.prototype.nextImage = function () {
-  console.log('next');
+  const selected = this.modalImages.querySelector('.selected');
+  const next =
+    selected.nextElementSibling || this.modalImages.firstElementChild;
+  selected.classList.remove('selected');
+  next.classList.add('selected');
+  this.setMainImage(next);
 };
 
 Gallery.prototype.prevImage = function () {
-  console.log('prev');
+  const selected = this.modalImages.querySelector('.selected');
+  const prev =
+    selected.previousElementSibling || this.modalImages.lastElementChild;
+  selected.classList.remove('selected');
+  prev.classList.add('selected');
+  this.setMainImage(prev);
 };
 
 //instances
